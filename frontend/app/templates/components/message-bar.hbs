@@ -1,0 +1,13 @@
+{{#if responseMessage}}
+  <div class="alert alert-success">
+    {{responseMessage}}
+    <a class="close" data-dismiss="alert">&#215;</a>
+  </div>
+{{/if}}
+
+{{#if errorMessage}}
+  <div class="alert alert-error">
+    {{errorMessage}}
+    <a class="close" data-dismiss="alert">&#215;</a>
+  </div>
+{{/if}}

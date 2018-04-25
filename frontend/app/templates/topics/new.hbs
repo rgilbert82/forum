@@ -1,0 +1,21 @@
+{{message-bar errorMessage=errorMessage responseMessage=responseMessage}}
+
+<div class="large_form">
+  <h3 class="form_title">Create New Topic</h3>
+
+  {{#if currentUser}}
+    <form {{action 'createTopic' on='submit'}}>
+      <div class="form-group">
+        {{input type='text' value=title placeholder="Topic Title" autofocus="autofocus" class="form-control"}}
+      </div>
+
+      <div class="form-group">
+        {{textarea value=body placeholder="Topic body" autofocus="autofocus" class="form-control"}}
+      </div>
+
+      <div class="form-group">
+        <button disabled={{isDisabled}} class="btn btn-default">Submit</button>
+      </div>
+    </form>
+  {{/if}}
+</div>

@@ -1,0 +1,21 @@
+{{message-bar errorMessage=errorMessage responseMessage=responseMessage}}
+
+<div class="large_form">
+  <h3 class="form_title">Sign Up For An Account</h3>
+
+  {{#unless currentUser}}
+    <form {{action 'createUser' on='submit'}}>
+      <div class="form-group">
+        {{input type='text' value=username placeholder="Username" autofocus="autofocus" class="form-control"}}
+      </div>
+
+      <div class="form-group">
+        {{input type='password' value=password placeholder="Password" autofocus="autofocus" class="form-control"}}
+      </div>
+
+      <div class="form-group">
+        <button disabled={{isDisabled}} class="btn btn-default">Sign Up</button>
+      </div>
+    </form>
+  {{/unless}}
+</div>

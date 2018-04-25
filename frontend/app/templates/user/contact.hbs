@@ -1,0 +1,19 @@
+<h3 class="conversations_list_title">contact {{model.username}}</h3>
+
+<div class="leave_a_message_form">
+  {{message-bar errorMessage=errorMessage responseMessage=responseMessage}}
+
+  <form {{action 'createConversation' on='submit'}}>
+    <div class="form-group">
+      {{input type=text value=title placeholder="message subject" autofocus="autofocus" class="form-control"}}
+    </div>
+
+    <div class="form-group">
+      {{textarea value=body placeholder="message body" autofocus="autofocus" rows="8" class="form-control"}}
+    </div>
+
+    <div class="form-group">
+      <button disabled={{isDisabled}} class="btn btn-default">Submit</button>
+    </div>
+  </form>
+</div>

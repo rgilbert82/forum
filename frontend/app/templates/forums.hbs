@@ -1,0 +1,33 @@
+<h2 class="section_title">forums</h2>
+
+<ul class="forums_list">
+  {{#each sortedForums as |forum|}}
+    <li>
+      {{#link-to 'topics' forum}}{{forum.name}}{{/link-to}}
+    </li>
+  {{/each}}
+</ul>
+
+
+{{#if isAdmin}}
+  <div class="add_item_box add_forum_box">
+    <div class="{{unless formHidden 'hidden' ''}} form_toggler">
+      <a href {{action 'toggleFormView'}}><span class="glyphicon glyphicon-plus"></span> Create New Forum</a>
+    </div>
+
+    {{message-bar errorMessage=errorMessage responseMessage=responseMessage}}
+
+    <div class="{{if formHidden 'hidden' ''}}">
+      <div class="form_toggler">
+        <a href {{action 'toggleFormView'}}><span class="glyphicon glyphicon-minus"></span> Create New Forum</a>
+      </div>
+
+      <form {{action 'createForum' on='submit'}} class="add_forum_form form-inline">
+        <div class="form-group">
+          {{input type='text' value=name placeholder="Forum Name" autofocus="autofocus" class="form-control"}}
+          <button disabled={{isDisabled}} class="btn btn-default">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{{/if}}

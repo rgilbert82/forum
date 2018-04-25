@@ -1,0 +1,18 @@
+<li class="conversation_list_item {{if conversation.hasUnreadMessages 'unread_conversation' ''}}">
+  <div class="conversation_details">
+    <div class="conversation_details_top">
+      <h4>{{#link-to 'mailbox.show' conversation.slug}}{{conversation.title}}{{/link-to}}</h4>
+      <aside>with {{#link-to 'user' otherUser.slug}}{{otherUser.username}}{{/link-to}} <span class="divider">|</span> {{conversation.latestMessageDateTime}}</aside>
+    </div>
+
+    <div class="conversation_details_bottom">
+      <ul>
+        {{#if inTrash}}
+          <li><a href {{action 'toggleTrashStatus'}}>move to inbox</a></li>
+        {{else}}
+          <li><a href {{action 'toggleTrashStatus'}}>move to trash</a></li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</li>

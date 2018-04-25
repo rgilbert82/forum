@@ -1,0 +1,48 @@
+<div class="section_header">
+  <div class="{{unless editViewHidden 'hidden' ''}}">
+    <h2 class="section_title user_title">{{model.username}}</h2>
+  </div>
+
+  {{#if userCanUpdate}}
+    <div class="{{if editViewHidden 'hidden' ''}} add_item_box section_edit_box user_edit_box">
+      <form {{action 'editUser' on='submit'}} class="form-inline">
+        <div class="form-group">
+          {{input type='text' value=model.username placeholder="Username" autofocus="autofocus" class="form-control"}}
+        </div>
+
+        <div class="form-group">
+          {{input type='password' value=model.password placeholder="Password" autofocus="autofocus" class="form-control"}}
+        </div>
+
+        <div class="form-group">
+          <button disabled={{isDisabled}} class="btn btn-default">Edit Profile</button>
+        </div>
+      </form>
+      <a href class="add_item_box_link" {{action 'deleteUser'}}>Delete Profile</a>
+    </div>
+  {{/if}}
+
+  <ul class="sub_nav">
+    <li>{{#link-to 'user.submitted' model.slug}}submitted{{/link-to}}</li>
+    <li class="list_divider">|</li>
+    <li>{{#link-to 'user.upvoted' model.slug}}upvoted{{/link-to}}</li>
+    <li class="list_divider">|</li>
+    <li>{{#link-to 'user.downvoted' model.slug}}downvoted{{/link-to}}</li>
+    <li class="list_divider">|</li>
+    <li>{{#link-to 'user.saved' model.slug}}saved{{/link-to}}</li>
+    <li class="list_divider">|</li>
+    <li>{{#link-to 'user.comments' model.slug}}comments{{/link-to}}</li>
+    {{#if currentUser}}
+      {{#if otherUserProfile}}
+        <li class="list_divider">|</li>
+        <li>{{#link-to 'user.contact' model.slug}}contact {{model.username}}{{/link-to}}</li>
+      {{/if}}
+      {{#if userCanUpdate}}
+        <li class="list_divider">|</li>
+        <li><a href {{action 'toggleEditView'}}><span class="glyphicon glyphicon-{{if editViewHidden 'plus' 'minus'}}"></span>Edit</a></li>
+      {{/if}}
+    {{/if}}
+  </ul>
+</div>
+
+{{outlet}}

@@ -1,0 +1,36 @@
+<div class="topic_header">
+  <div class="vote_count_box">
+    <div>
+      <a href {{action 'upvote'}}><span class="glyphicon glyphicon-arrow-up {{if userUpvotedTopic 'upvoted' ''}}"></span></a>
+    </div>
+    <div class="vote_count">
+      <span class="{{if userUpvotedTopic 'upvoted' ''}}{{if userDownvotedTopic 'downvoted' ''}}">{{topic.voteCount}}</span>
+    </div>
+    <div>
+      <a href {{action 'downvote'}}><span class="glyphicon glyphicon-arrow-down {{if userDownvotedTopic 'downvoted' ''}}"></span></a>
+    </div>
+  </div>
+
+  <div class="topic_details">
+    <div class="topic_details_top">
+      <h4>{{#link-to 'topics.show' topic.forum.slug topic.slug}}{{topic.title}}{{/link-to}}</h4>
+      <aside>submitted by {{#link-to 'user' topic.user.slug}}{{topic.user.username}}{{/link-to}} <span class="divider">|</span> {{topic.formattedDateTime}}</aside>
+    </div>
+
+    {{yield}}
+
+    <div class="topic_details_bottom">
+      <ul>
+        <li>{{#link-to 'topics.show' topic.forum.slug topic.slug}}{{topic.commentsCount}} {{topic.commentsPluralize}}{{/link-to}}</li>
+        {{#if getSave}}
+          <li><a href {{action 'deleteSave'}}>unsave</a></li>
+        {{else}}
+          <li><a href {{action 'createSave'}}>save</a></li>
+        {{/if}}
+        {{#if userCanUpdate}}
+          <li>{{#link-to 'topics.edit' topic.forum.slug topic.slug}}edit{{/link-to}}</li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</div>

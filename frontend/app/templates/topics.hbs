@@ -1,0 +1,36 @@
+<div class="section_header">
+  <div class="{{unless editViewHidden 'hidden' ''}}">
+    <h2 class="section_title">{{model.name}}</h2>
+  </div>
+
+  {{#if isAdmin}}
+    <div class="{{if editViewHidden 'hidden' ''}} add_item_box section_edit_box">
+      <form {{action 'editForum' on='submit'}} class="form-inline">
+        <div class="form-group">
+          {{input type='text' value=model.name placeholder="Forum Name" autofocus="autofocus" class="form-control"}}
+        </div>
+        <div class="form-group">
+          <button disabled={{isDisabled}} class="btn btn-default">Rename</button>
+        </div>
+      </form>
+
+      <a href class="add_item_box_link" {{action 'deleteForum'}}>Delete Forum</a>
+    </div>
+  {{/if}}
+
+  <ul class="sub_nav">
+    <li>{{#link-to 'topics.index'}}All Topics{{/link-to}}</li>
+
+    {{#if currentUser}}
+      <li class="list_divider">|</li>
+      <li>{{#link-to 'topics.new'}}New Topic{{/link-to}}</li>
+    {{/if}}
+
+    {{#if isAdmin}}
+      <li class="list_divider">|</li>
+      <li><a href {{action 'toggleEditView'}}><span class="glyphicon glyphicon-{{if editViewHidden 'plus' 'minus'}}"></span>Rename Forum</a></li>
+    {{/if}}
+  </ul>
+</div>
+
+{{outlet}}

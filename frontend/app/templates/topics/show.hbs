@@ -1,0 +1,31 @@
+<div class="topic_profile">
+  {{#topic-header topic=model}}
+    <div class="topic_body">
+      <p>{{model.body}}</p>
+    </div>
+  {{/topic-header}}
+</div>
+
+
+{{message-bar errorMessage=errorMessage responseMessage=responseMessage}}
+
+<h4 class="topic_profile_comment_count">showing {{model.commentsCount}} {{model.commentsPluralize}}</h4>
+
+{{#if currentUser}}
+  <div class="leave_a_comment_large">
+    <form {{action 'createComment' on='submit'}}>
+      <div class="form-group">
+        {{textarea value=body placeholder="Leave a comment" autofocus="autofocus" class="form-control"}}
+      </div>
+
+      <div class="form-group">
+        <button disabled={{isDisabled}} class="btn btn-default">Comment</button>
+      </div>
+    </form>
+  </div>
+{{/if}}
+
+
+{{comments-list replies=parentPosts hasReplies=true}}
+
+{{outlet}}

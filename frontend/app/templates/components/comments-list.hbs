@@ -1,0 +1,21 @@
+{{#if header}}
+  <h3 class="comments_list_title">{{header}} <span class="gray">({{commentsLength}})</span></h3>
+{{/if}}
+
+{{#if hasContent}}
+  <ul class="replies_list">
+    {{#if hasReplies}}
+      {{#each sortedRepliesAsc as |reply|}}
+        {{comment-partial comment=reply hasReplies=hasReplies}}
+      {{/each}}
+    {{else}}
+      {{#each sortedRepliesDesc as |reply|}}
+        {{#if reply.editable}}
+          {{comment-partial comment=reply hasReplies=hasReplies}}
+        {{/if}}
+      {{/each}}
+    {{/if}}
+  </ul>
+{{else}}
+  <p class="nothing_here">there are no comments here</p>
+{{/if}}

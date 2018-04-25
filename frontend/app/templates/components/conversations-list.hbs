@@ -1,0 +1,16 @@
+{{#if trash}}
+  <h3 class="conversations_list_title">trash <span class="gray">({{conversationsLength}})</span></h3>
+{{else}}
+  <h3 class="conversations_list_title">inbox <span class="gray">({{conversationsLength}})</span></h3>
+{{/if}}
+
+
+{{#if nothingHere}}
+  <p class="nothing_here">there are no messages here</p>
+{{else}}
+<ul class="conversations_list">
+  {{#each sortedConversations as |conv|}}
+    {{conversation-list-item conversation=conv trash=trash}}
+  {{/each}}
+</ul>
+{{/if}}

@@ -1,0 +1,15 @@
+{{#if header}}
+  <h3 class="topics_list_title">{{header}} <span class="gray">({{topicsLength}})</span></h3>
+{{/if}}
+
+{{#if hasTopics}}
+  <ul class="topics_list">
+    {{#each sortedTopics as |topic|}}
+      <li class="topic_list_item">
+        {{topic-header topic=topic}}
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p class="nothing_here">there are no topics here</p>
+{{/if}}

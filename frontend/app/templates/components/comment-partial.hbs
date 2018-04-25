@@ -1,0 +1,71 @@
+<li class="comment_list_item">
+  <div class="{{if fullView 'hidden' ''}} small_comment_view">
+    <div class="comment_header">
+      <a href {{action 'toggleFullView'}}>[+]</a>
+      {{#link-to 'user' comment.user.slug}}{{comment.user.username}}{{/link-to}}
+      <span>{{comment.formattedDateTime}}</span>
+      <span>({{comment.childCount}} {{comment.childrenPluralize}})</span>
+    </div>
+  </div>
+
+  <div class="{{unless fullView 'hidden' ''}} full_comment_view">
+    <div class="comment_header">
+      <a href {{action 'toggleFullView'}}>[-]</a>
+      {{#link-to 'user' comment.user.slug}}{{comment.user.username}}{{/link-to}}
+      <span class="divider">|</span> <span>{{comment.formattedDateTime}}</span>
+    </div>
+
+    <div class="comment_main">
+      <p class="{{unless comment.editable 'deleted_comment' ''}}">{{comment.body}}</p>
+
+      <div class="comment_profile_links">
+        <ul class="comment_options">
+          {{#if replyAllowed}}
+            <li><a href {{action 'toggleReplyView'}}>Reply</a></li>
+          {{/if}}
+          {{#if userCanUpdate}}
+            <li><a href {{action 'toggleEditView'}}>Edit</a></li>
+            <li><a href {{action 'deleteComment'}}>Delete</a></li>
+          {{/if}}
+        </ul>
+      </div>
+    </div><!-- comment_main -->
+
+    {{#if replyAllowed}}
+      <div class="{{if replyHidden 'hidden' ''}} leave_a_comment_small comment_reply_form">
+        <form {{action 'createReply' on='submit'}}>
+          <div class="form-group">
+            {{textarea value=body placeholder="Reply" autofocus="autofocus" class="form-control"}}
+          </div>
+
+          <div class="form-group">
+            <button disabled={{replyIsDisabled}} class="btn btn-default">Reply</button>
+          </div>
+        </form>
+      </div>
+    {{/if}}
+
+    {{#if userCanUpdate}}
+      <div class="{{if editHidden 'hidden' ''}} leave_a_comment_small comment_edit_form">
+        <form {{action 'editComment' on='submit'}}>
+          <div class="form-group">
+            {{textarea value=comment.body placeholder="Edit your comment" autofocus="autofocus" class="form-control"}}
+          </div>
+
+          <div class="form-group">
+            <button disabled={{commentIsDisabled}} class="btn btn-default">Edit</button>
+          </div>
+        </form>
+      </div>
+    {{/if}}
+
+    {{#if hasReplies}}
+      {{comments-list replies=replies hasReplies=true}}
+    {{else}}
+      <div class="comment_in_topic">
+        <span>In topic: {{#link-to 'topics.show' comment.topic.forum.slug comment.topic.slug}}{{comment.topic.title}}{{/link-to}}</span>
+      </div>
+    {{/if}}
+
+  </div><!-- full_comment_view -->
+</li>
